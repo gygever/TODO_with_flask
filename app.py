@@ -1,15 +1,12 @@
 from model import app, db, Tasks
+from flask import render_template
 
-form_tasks = []
 
 @app.route('/')
 def hello_world():
-    global form_tasks
     tasks = Tasks.query.all()
-    for i in tasks:
-        form_tasks.append(str(i.id)+' Название: '+i.title+' Описание:'+i.content)
-    return '\n'.join(i for i in form_tasks)
+    return render_template('index.html', tasks=tasks)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

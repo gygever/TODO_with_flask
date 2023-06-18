@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Заметки</h1>
+<ol>
+    {% for task in tasks %}
+    <li>
+        <p> Название: {{task.title}} </p>
+        <p> Описание: {{task.content}} </p>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}
