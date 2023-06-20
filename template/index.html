@@ -7,6 +7,9 @@
     <li>
         <p> Название: {{task.title}} </p>
         <p> Описание: {{task.content}} </p>
+        <form action="/delete/{{task.id}}" method="POST">
+            <input type="submit" class="btn btn-dark" value="Удалить">
+        </form>
     </li>
     {% endfor %}
 </ol>
