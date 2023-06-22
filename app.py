@@ -9,7 +9,7 @@ db.init_app(app)
 @app.route('/')
 def show():
     tasks = Tasks.query.all()
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html', tasks=tasks[::-1])
 
 
 @app.route('/add', methods=['POST'])
@@ -21,7 +21,7 @@ def add():
         db.session.add(task)
         db.session.commit()
         tasks = Tasks.query.all()
-        return render_template('index.html', tasks=tasks)
+        return render_template('index.html', tasks=tasks[::-1])
 
 
 @app.route('/delete/<int:id_del>', methods=['POST'])
@@ -30,12 +30,21 @@ def delete(id_del):
     db.session.delete(task)
     db.session.commit()
     tasks = Tasks.query.all()
-    return render_template('index.html', tasks=tasks)
+    return render_template('index.html', tasks=tasks[::-1])
 
 
 @app.route('/edit/<int:id_red>', methods=['GET', 'POST'])
 def edit(id_red):
-    pass
+    if request.method == 'POST':
+        red_task = Tasks.query.get(id_red)
+        red_task.title = request.form['title']
+        red_task.content = request.form['content']
+        db.session.commit()
+        tasks = Tasks.query.all()
+        return render_template('index.html', tasks=tasks[::-1])
+    else:
+        task = Tasks.query.get(id_red)
+        return render_template('edit.html', task=task)
 
 
 if __name__ == '__main__':

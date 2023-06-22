@@ -7,7 +7,7 @@
     <label for="title">Название</label><br>
     <input type="text" id="title" name="title"><br>
     <label for="content">Описание</label><br>
-    <input type="text" id="content" name="content"><br>
+    <textarea id="content" name="content"></textarea><br>
     <button type="submit">Создать</button>
 </form>
 <h3>Заметки</h3>
@@ -20,7 +20,7 @@
             <input type="submit" class="btn btn-dark" value="Удалить">
         </form>
         <p></p>
-        <form action="/edit/{{task.id}}" method="POST">
+        <form action="/edit/{{task.id}}" method="GET">
             <input type="submit" class="btn btn-dark" value="Редактировать">
         </form>
     </li>

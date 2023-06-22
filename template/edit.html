@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Редактировать заметку:</h1>
+<form action="/edit/{{task.id}}" method="POST">
+    <label for="title">Название</label><br>
+    <input type="text" id="title" name="title" value="{{task.title}}"><br>
+    <label for="content">Описание</label><br>
+    <textarea id="content" name="content">{{task.content}}</textarea><br>
+    <br>
+    <button type="submit">Изменить</button>
+</form>
+{% endblock %}
