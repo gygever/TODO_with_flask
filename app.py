@@ -12,9 +12,16 @@ def show():
     return render_template('index.html', tasks=tasks)
 
 
-@app.route('/add')
+@app.route('/add', methods=['POST'])
 def add():
-    pass
+    if request.method == 'POST':
+        task_title = request.form['title']
+        task_content = request.form['content']
+        task = Tasks(title=task_title, content=task_content)
+        db.session.add(task)
+        db.session.commit()
+        tasks = Tasks.query.all()
+        return render_template('index.html', tasks=tasks)
 
 
 @app.route('/delete/<int:id_del>', methods=['POST'])
@@ -26,8 +33,8 @@ def delete(id_del):
     return render_template('index.html', tasks=tasks)
 
 
-@app.route('/edit/<int:id>', methods=['GET', 'POST'])
-def edit(id):
+@app.route('/edit/<int:id_red>', methods=['GET', 'POST'])
+def edit(id_red):
     pass
 
 

@@ -2,6 +2,15 @@
 
 {% block content %}
 <h1>Заметки</h1>
+<h3>Создать заметку:</h3>
+<form action="/add" method="POST">
+    <label for="title">Название</label><br>
+    <input type="text" id="title" name="title"><br>
+    <label for="content">Описание</label><br>
+    <input type="text" id="content" name="content"><br>
+    <button type="submit">Создать</button>
+</form>
+<h3>Заметки</h3>
 <ol>
     {% for task in tasks %}
     <li>
@@ -9,6 +18,10 @@
         <p> Описание: {{task.content}} </p>
         <form action="/delete/{{task.id}}" method="POST">
             <input type="submit" class="btn btn-dark" value="Удалить">
+        </form>
+        <p></p>
+        <form action="/edit/{{task.id}}" method="POST">
+            <input type="submit" class="btn btn-dark" value="Редактировать">
         </form>
     </li>
     {% endfor %}
